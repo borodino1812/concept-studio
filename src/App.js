@@ -1,7 +1,8 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-import Showcase from "./pages/Showcase"
-import TicketPage from "./pages/TicketPage"
-import Nav from "./components/Nav"
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Showcase from "./pages/Showcase";
+import TicketPage from "./pages/TicketPage";
+import Nav from "./components/Nav";
 
 const App = () => {
   return (
@@ -15,7 +16,7 @@ const App = () => {
         </Routes>
       </BrowserRouter>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

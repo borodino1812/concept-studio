@@ -1,3 +1,4 @@
+import React from "react";
 import TicketCard from "../components/TicketCard";
 import prev1 from "../images/pyramid1.png";
 

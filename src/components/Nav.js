@@ -1,8 +1,9 @@
-import logo from "../images/pyramid1.png"
-import { useNavigate } from "react-router-dom"
+import logo from "../images/pyramid1.png";
+import { useNavigate } from "react-router-dom";
+import React from "react";
 
 const Nav = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <nav>
       <div className="logo-container">
@@ -17,7 +18,7 @@ const Nav = () => {
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Nav
+export default Nav;

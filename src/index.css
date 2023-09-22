@@ -57,3 +57,40 @@ nav .logo-container img {
   text-decoration: none;
   color: #060;
 }
+
+/* ------ ticket ------ */
+
+.ticket-page {
+  padding: 30px;
+  width: 100%;
+}
+
+.ticket-page .ticket-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.ticket-page form {
+  display: flex;
+}
+
+.ticket-page form section {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  width: 500px;
+}
+
+.ticket-page form label {
+  margin: 20px 0 0 0;
+}
+
+.ticket-page form select,
+.ticket-page form input {
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 10px;
+  border: 1.5px solid #444;
+  margin: 5px;
+}
