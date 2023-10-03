@@ -38,7 +38,7 @@ nav .logo-container img {
 /* ------ Dashboard ------ */
 
 .showcase,
-.ticket-page {
+.ticket {
   padding: 30px;
   width: 100%;
 }
@@ -60,34 +60,34 @@ nav .logo-container img {
 
 /* ------ ticket ------ */
 
-.ticket-page {
+.ticket {
   padding: 30px;
   width: 100%;
 }
 
-.ticket-page .ticket-container {
+.ticket .ticket-container {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.ticket-page form {
+.ticket form {
   display: flex;
 }
 
-.ticket-page form section {
+.ticket form section {
   display: flex;
   flex-direction: column;
   margin: 10px;
   width: 500px;
 }
 
-.ticket-page form label {
+.ticket form label {
   margin: 20px 0 0 0;
 }
 
-.ticket-page form select,
-.ticket-page form input {
+.ticket form select,
+.ticket form input {
   padding: 10px;
   font-size: 15px;
   border-radius: 10px;

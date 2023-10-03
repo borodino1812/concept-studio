@@ -1,11 +1,25 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const TicketPage = () => {
   const [formData, setFormData] = useState({ status: "not uploaded" });
   const editMode = false;
 
-  const handleSubmit = () => {
-    console.log("Submitted");
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!editMode) {
+      const response = await axios.post("http://localhost:8000/tickets", {
+        formData,
+      });
+      console.log("posting");
+      const success = response.status === 200;
+      if (success) {
+        navigate("/");
+      }
+    }
   };
   const handleChange = (e) => {
     const value = e.target.value;
@@ -22,7 +36,7 @@ const TicketPage = () => {
   console.log(formData);
 
   return (
-    <div className="ticket-page">
+    <div className="ticket">
       <h1>{editMode ? "Update your Ticket" : "Create a Ticket"}</h1>
       <form onSubmit={handleSubmit}>
         <section>
@@ -65,7 +79,6 @@ const TicketPage = () => {
             name="category"
             type="text"
             onChange={handleChange}
-            required={true}
             value={formData.category}
           />
           {editMode && (
