@@ -9,7 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const url = "http://localhost:3000/tickets";
+const url = "http://localhost:3000/ticket";
 
 app.post("/tickets", async (req, res) => {
   const formData = req.body.formData;
@@ -25,7 +25,6 @@ app.post("/tickets", async (req, res) => {
 
   try {
     const response = await axios(url, options);
-
     res.status(200).json(response.data);
   } catch (err) {
     console.log(
