@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const TicketPage = () => {
-  const [formData, setFormData] = useState({ status: "not uploaded" });
+  const [formData, setFormData] = useState({
+    status: "not uploaded",
+  });
   const editMode = false;
 
   const navigate = useNavigate();
@@ -11,7 +13,8 @@ const TicketPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!editMode) {
-      const response = await axios.post("http://localhost:8000/tickets", {
+      console.log("wwwwwwwwwwwwwwwwwwwww");
+      const response = await axios.post("http://127.0.0.1:8000/tickets", {
         formData,
       });
       console.log("posting");
@@ -21,6 +24,7 @@ const TicketPage = () => {
       }
     }
   };
+
   const handleChange = (e) => {
     const value = e.target.value;
     const name = e.target.name;

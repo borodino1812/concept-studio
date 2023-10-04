@@ -9,7 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const url = "http://localhost:8000/tickets";
+const url = "http://localhost:3000/tickets";
 
 app.post("/tickets", async (req, res) => {
   const formData = req.body.formData;
@@ -25,9 +25,12 @@ app.post("/tickets", async (req, res) => {
 
   try {
     const response = await axios(url, options);
+
     res.status(200).json(response.data);
   } catch (err) {
-    console.log(err);
+    console.log(
+      `I got it bad and it aint no goooooooood... Skeepp-ppee-bop-bi-dup-pi-popp-poah-boah: ${err}`
+    );
     res.status(500).json({ message: err });
   }
 });
