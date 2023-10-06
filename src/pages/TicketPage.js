@@ -1,14 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import CategoriesContext from "../context";
 
 const TicketPage = () => {
   const [formData, setFormData] = useState({
     status: "not uploaded",
   });
   const editMode = false;
+  const { categories, setCategories } = useContext(CategoriesContext);
 
   const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    const name = e.target.name;
+
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,19 +35,6 @@ const TicketPage = () => {
       }
     }
   };
-
-  const handleChange = (e) => {
-    const value = e.target.value;
-    const name = e.target.name;
-
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  const categories = ["test1", "test2"];
-
   console.log(formData);
 
   return (
@@ -64,7 +63,7 @@ const TicketPage = () => {
           <label>Category</label>
           <select
             name="category"
-            value={formData.category}
+            value={formData.category /* || categories[0] */}
             onChange={handleChange}
           >
             {categories?.map((category, _index) => {

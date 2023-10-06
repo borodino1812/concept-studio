@@ -1,0 +1,42 @@
+const tickets = [
+  {
+    preview: prev1,
+    title: "Scandy Interior",
+    desc: "lorem ipsum sit amet et cetera",
+    category: "A1 2022",
+    color: "#fff",
+    status: "uploaded",
+  },
+  {
+    preview: prev1,
+    title: "Eco Interior",
+    desc: "lorem ipsum sit amet et cetera",
+    category: "A1 2022",
+    color: "#fff",
+    status: "uploaded",
+  },
+  {
+    preview: prev1,
+    title: "Eco Interior",
+    desc: "lorem ipsum sit amet et cetera id est",
+    category: "B2 2023",
+    color: "#999",
+    status: "uploaded",
+  },
+  {
+    preview: prev1,
+    title: "Minimalistic Interior",
+    desc: "lorem ipsum sit amet et cetera",
+    category: "A1 2023",
+    color: "#333",
+    status: "uploaded",
+  },
+  {
+    preview: prev1,
+    title: "Minimalistic Interior Demo",
+    desc: "lorem ipsum sit amet et cetera",
+    category: "A1 2023",
+    color: "#333",
+    status: "hidden",
+  },
+];

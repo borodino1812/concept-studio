@@ -2,7 +2,6 @@ const PORT = 8000;
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
-const axios = require("axios");
 const db = require("./connection");
 
 const app = express();
@@ -20,19 +19,19 @@ app.get("/tickets", (req, res) => {
       });
       console.log("The solution is good ");
       // db.end();
-      function getCircularReplacer() {
-        const seen = new WeakSet();
-        return (key, value) => {
-          if (typeof value === "object" && value !== null) {
-            if (seen.has(value)) {
-              return;
-            }
-            seen.add(value);
-          }
-          return value;
-        };
-      }
-      const replaced = JSON.stringify(result, getCircularReplacer());
+      // function getCircularReplacer() {
+      //   const seen = new WeakSet();
+      //   return (key, value) => {
+      //     if (typeof value === "object" && value !== null) {
+      //       if (seen.has(value)) {
+      //         return;
+      //       }
+      //       seen.add(value);
+      //     }
+      //     return value;
+      //   };
+      // }
+      // const replaced = JSON.stringify(result, getCircularReplacer());
       res.status(200).send(result);
     });
   } catch (err) {
@@ -63,6 +62,25 @@ app.post("/tickets", async (req, res) => {
     // db.end();
   } catch (err) {
     console.log(err);
+  }
+});
+
+app.delete("/tickets/:documentId", async (req, res) => {
+  const id = req.params.documentId;
+
+  const options = {
+    method: "DELETE",
+    headers: {
+      Accepts: "application/json",
+    },
+  };
+
+  try {
+    const response = "RESPONSE";
+    res.status(200).send(response);
+  } catch (error) {
+    console.log(err);
+    res.status(500).json({ message: err });
   }
 });
 
