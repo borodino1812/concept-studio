@@ -13,8 +13,7 @@ const TicketPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!editMode) {
-      console.log("wwwwwwwwwwwwwwwwwwwww");
-      const response = await axios.post("http://127.0.0.1:8000/tickets", {
+      const response = await axios.post("http://localhost:8000/tickets", {
         formData,
       });
       console.log("posting");

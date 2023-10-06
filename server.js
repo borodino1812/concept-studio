@@ -9,28 +9,60 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const url = "http://localhost:3000/ticket";
+const url = "http://192.168.56.1:3000/ticket";
+
+app.get("/tickets", (req, res) => {
+  try {
+    const formData = db.query("SELECT * FROM posts;", (err, result, fields) => {
+      if (err) throw err;
+      result.forEach((res) => {
+        console.log(res.title);
+      });
+      console.log("The solution is good ");
+      // db.end();
+      function getCircularReplacer() {
+        const seen = new WeakSet();
+        return (key, value) => {
+          if (typeof value === "object" && value !== null) {
+            if (seen.has(value)) {
+              return;
+            }
+            seen.add(value);
+          }
+          return value;
+        };
+      }
+      const replaced = JSON.stringify(result, getCircularReplacer());
+      res.status(200).send(result);
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 app.post("/tickets", async (req, res) => {
-  const formData = req.body.formData;
-  const options = {
-    method: "POST",
-    headers: {
-      Accepts: "application/json",
-      // "X-Cassandra-Token": token,
-      "Content-Type": "application/json",
-    },
-    data: formData,
-  };
-
   try {
-    const response = await axios(url, options);
-    res.status(200).json(response.data);
-  } catch (err) {
-    console.log(
-      `I got it bad and it aint no goooooooood... Skeepp-ppee-bop-bi-dup-pi-popp-poah-boah: ${err}`
+    const formData = req.body.formData;
+    db.query(
+      `INSERT INTO posts(
+        title, 
+        \`desc\`, 
+        category, 
+        preview
+        ) 
+        VALUES (
+          '${formData.title}', 
+          '${formData.desc}', 
+          '${formData.category}',
+          '${formData.preview}'
+          );`
     );
-    res.status(500).json({ message: err });
+
+    console.log("Post query is completed");
+    res.status(200).json({ data: formData });
+    // db.end();
+  } catch (err) {
+    console.log(err);
   }
 });
 
