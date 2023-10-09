@@ -1,5 +1,5 @@
 const TitleDisplay = () => {
-  return <div>TitleDisplay</div>
-}
+  return <div>TitleDisplay</div>;
+};
 
-export default TitleDisplay
+export default TitleDisplay;

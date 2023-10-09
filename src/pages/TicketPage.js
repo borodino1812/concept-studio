@@ -1,16 +1,17 @@
-import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useContext, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import CategoriesContext from "../context";
 
-const TicketPage = () => {
+const TicketPage = ({ editMode }) => {
   const [formData, setFormData] = useState({
     status: "not uploaded",
   });
-  const editMode = false;
+
   const { categories, setCategories } = useContext(CategoriesContext);
 
   const navigate = useNavigate();
+  let { id } = useParams();
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -28,13 +29,23 @@ const TicketPage = () => {
       const response = await axios.post("http://localhost:8000/tickets", {
         formData,
       });
-      console.log("posting");
+
       const success = response.status === 200;
       if (success) {
         navigate("/");
       }
     }
   };
+
+  const fetchData = async () => {
+    const response = await axios.get(`http://localhost:8000/tickets/${id}`);
+    setFormData(response.data);
+  };
+
+  useEffect(() => {
+    if (editMode) fetchData();
+  }, []);
+
   console.log(formData);
 
   return (
@@ -67,10 +78,14 @@ const TicketPage = () => {
             onChange={handleChange}
           >
             {categories?.map((category, _index) => {
+              console.log("CATEGORIES");
               return (
                 <option key={_index} value={category}>
                   {category}
                 </option>
+                // {categories?.map((category, _index) => (
+                //   <option value={category}>{category}</option>
+                // ))}
               );
             })}
           </select>

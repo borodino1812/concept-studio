@@ -17,8 +17,8 @@ app.get("/tickets", (req, res) => {
       result.forEach((res) => {
         console.log(res.title);
       });
-      console.log("The solution is good ");
-      // db.end();
+      console.log("^ It is a list ^");
+
       // function getCircularReplacer() {
       //   const seen = new WeakSet();
       //   return (key, value) => {
@@ -32,8 +32,27 @@ app.get("/tickets", (req, res) => {
       //   };
       // }
       // const replaced = JSON.stringify(result, getCircularReplacer());
-      res.status(200).send(result);
+      res.status(200).json(result);
     });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.get("/tickets/:documentId", (req, res) => {
+  const id = req.params.documentId;
+  try {
+    const formData = db.query(
+      `SELECT * FROM posts WHERE id=${id};`,
+      (err, result, fields) => {
+        if (err) throw err;
+        result.forEach((res) => {
+          console.log(res.title);
+        });
+        console.log("^ It is a list of one ^");
+        res.status(200).json(result);
+      }
+    );
   } catch (err) {
     console.log(err);
   }
@@ -59,24 +78,30 @@ app.post("/tickets", async (req, res) => {
 
     console.log("Post query is completed");
     res.status(200).json({ data: formData });
-    // db.end();
   } catch (err) {
     console.log(err);
   }
 });
 
+app.put("/tickets/:documentId", async (req, res) => {
+  const id = req.params.documentId;
+  const data = req.body.data;
+
+  try {
+    const response = `${url}/${id}`;
+    res.status(200).send(response);
+  } catch (error) {
+    console.log(err);
+    res.status(500).json({ message: err });
+  }
+});
 app.delete("/tickets/:documentId", async (req, res) => {
   const id = req.params.documentId;
 
-  const options = {
-    method: "DELETE",
-    headers: {
-      Accepts: "application/json",
-    },
-  };
+  db.query(`DELETE FROM posts WHERE id=${id};`);
 
   try {
-    const response = "RESPONSE";
+    const response = `${url}/${id}`;
     res.status(200).send(response);
   } catch (error) {
     console.log(err);

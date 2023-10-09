@@ -16,7 +16,10 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Showcase />} />
             <Route path="/ticket" element={<TicketPage />} />
-            <Route path="/ticket:id" element={<TicketPage editMode={true} />} />
+            <Route
+              path="/ticket/:id"
+              element={<TicketPage editMode={true} />}
+            />
           </Routes>
         </BrowserRouter>
       </CategoriesContext.Provider>

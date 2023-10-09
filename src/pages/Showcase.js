@@ -11,7 +11,7 @@ const Showcase = () => {
   useEffect(async () => {
     const response = await axios.get("http://localhost:8000/tickets");
 
-    const dataObject = response.data.data || {};
+    const dataObject = response.data || {};
 
     const arrayOfKeys = Object.keys(dataObject);
     const arrayOfData = Object.keys(dataObject).map((key) => dataObject[key]);
@@ -29,8 +29,6 @@ const Showcase = () => {
   useEffect(() => {
     setCategories([...new Set(tickets?.map(({ category }) => category))]);
   }, [tickets]);
-
-  console.log(categories);
 
   const uniqueCategories = [
     ...new Set(tickets?.map(({ category }) => category)),

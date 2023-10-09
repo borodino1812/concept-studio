@@ -8,14 +8,14 @@ import StatusDisplay from "./StatusDisplay";
 const TicketCard = ({ ticket }) => {
   return (
     <div className="ticket-card">
-      <Link to={`/ticket/${ticket.documentId}`} id="link">
+      <Link to={`/ticket/${ticket.id}`} id="link">
         <StatusDisplay status={ticket.status} />
         <h3>{ticket.title}</h3>
         <PreviewDisplay ticket={ticket} />
         <TitleDisplay />
         <DescDisplay />
       </Link>
-      <DeleteBlock />
+      <DeleteBlock documentId={ticket.id} />
     </div>
   );
 };
