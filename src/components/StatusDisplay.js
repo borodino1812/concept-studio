@@ -1,5 +1,7 @@
 const StatusDisplay = ({ status }) => {
-  const getColor = () => {
+  //
+  //
+  const getColor = (status) => {
     let color;
     switch (status) {
       case "uploaded":

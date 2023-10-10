@@ -12,8 +12,8 @@ const TicketCard = ({ ticket }) => {
         <StatusDisplay status={ticket.status} />
         <h3>{ticket.title}</h3>
         <PreviewDisplay ticket={ticket} />
-        <TitleDisplay />
-        <DescDisplay />
+        <TitleDisplay title={ticket.title} />
+        <DescDisplay desc={ticket.desc} />
       </Link>
       <DeleteBlock documentId={ticket.id} />
     </div>

@@ -6,6 +6,7 @@ import CategoriesContext from "../context";
 const TicketPage = ({ editMode }) => {
   const [formData, setFormData] = useState({
     status: "not uploaded",
+    timestamp: new Date().toISOString(),
   });
 
   const { categories, setCategories } = useContext(CategoriesContext);
@@ -25,6 +26,18 @@ const TicketPage = ({ editMode }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (editMode) {
+      const response = await axios.put(`http://localhost:8000/tickets/${id}`, {
+        data: formData,
+      });
+
+      const success = response.status === 200;
+      if (success) {
+        navigate("/");
+      }
+    }
+
     if (!editMode) {
       const response = await axios.post("http://localhost:8000/tickets", {
         formData,
@@ -39,7 +52,7 @@ const TicketPage = ({ editMode }) => {
 
   const fetchData = async () => {
     const response = await axios.get(`http://localhost:8000/tickets/${id}`);
-    setFormData(response.data);
+    setFormData(response.data[0]);
   };
 
   useEffect(() => {
@@ -78,7 +91,6 @@ const TicketPage = ({ editMode }) => {
             onChange={handleChange}
           >
             {categories?.map((category, _index) => {
-              console.log("CATEGORIES");
               return (
                 <option key={_index} value={category}>
                   {category}

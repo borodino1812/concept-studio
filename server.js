@@ -8,8 +8,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const url = "http://192.168.56.1:3000/ticket";
-
 app.get("/tickets", (req, res) => {
   try {
     const formData = db.query("SELECT * FROM posts;", (err, result, fields) => {
@@ -18,20 +16,6 @@ app.get("/tickets", (req, res) => {
         console.log(res.title);
       });
       console.log("^ It is a list ^");
-
-      // function getCircularReplacer() {
-      //   const seen = new WeakSet();
-      //   return (key, value) => {
-      //     if (typeof value === "object" && value !== null) {
-      //       if (seen.has(value)) {
-      //         return;
-      //       }
-      //       seen.add(value);
-      //     }
-      //     return value;
-      //   };
-      // }
-      // const replaced = JSON.stringify(result, getCircularReplacer());
       res.status(200).json(result);
     });
   } catch (err) {
@@ -88,8 +72,19 @@ app.put("/tickets/:documentId", async (req, res) => {
   const data = req.body.data;
 
   try {
-    const response = `${url}/${id}`;
-    res.status(200).send(response);
+    console.log(`The update data is${data}`);
+    db.query(
+      `UPDATE posts 
+      SET 
+      title='${data.title}', 
+      \`desc\`='${data.desc}', 
+
+      category='${data.category}', 
+      preview='${data.preview}'  
+      WHERE id=${id}`
+    );
+    const response = `Post with id = /${id} has been edited`;
+    res.status(200).send(data);
   } catch (error) {
     console.log(err);
     res.status(500).json({ message: err });
@@ -101,7 +96,7 @@ app.delete("/tickets/:documentId", async (req, res) => {
   db.query(`DELETE FROM posts WHERE id=${id};`);
 
   try {
-    const response = `${url}/${id}`;
+    const response = `Post with id = /${id} has been removed`;
     res.status(200).send(response);
   } catch (error) {
     console.log(err);
