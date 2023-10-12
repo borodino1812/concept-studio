@@ -4,12 +4,13 @@ import axios from "axios";
 import CategoriesContext from "../context";
 
 const TicketPage = ({ editMode }) => {
+  const { categories, setCategories } = useContext(CategoriesContext);
+
   const [formData, setFormData] = useState({
     status: "not uploaded",
     timestamp: new Date().toISOString(),
+    category: categories[0],
   });
-
-  const { categories, setCategories } = useContext(CategoriesContext);
 
   const navigate = useNavigate();
   let { id } = useParams();
@@ -87,7 +88,7 @@ const TicketPage = ({ editMode }) => {
           <label>Category</label>
           <select
             name="category"
-            value={formData.category /* || categories[0] */}
+            value={formData.category || "New Category"}
             onChange={handleChange}
           >
             {categories?.map((category, _index) => {
@@ -119,10 +120,16 @@ const TicketPage = ({ editMode }) => {
                 onChange={handleChange}
               >
                 <option
+                  selected={formData.status === "not uploaded"}
+                  value="not uploaded"
+                >
+                  not uploaded
+                </option>
+                <option
                   selected={formData.status === "uploaded"}
                   value="uploaded"
                 >
-                  Uploaded
+                  uploaded
                 </option>
                 <option selected={formData.status === "hidden"} value="hidden">
                   hidden

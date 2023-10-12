@@ -4,11 +4,14 @@ const StatusDisplay = ({ status }) => {
   const getColor = (status) => {
     let color;
     switch (status) {
+      case "not uploaded":
+        color = "#e59866";
+        break;
       case "uploaded":
         color = "#080";
         break;
       case "hidden":
-        color = "#800";
+        color = "#566";
         break;
       default:
         color = "#0f0";

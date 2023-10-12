@@ -50,13 +50,15 @@ app.post("/tickets", async (req, res) => {
         title, 
         \`desc\`, 
         category, 
-        preview
+        preview, 
+        status
         ) 
         VALUES (
           '${formData.title}', 
           '${formData.desc}', 
           '${formData.category}',
-          '${formData.preview}'
+          '${formData.preview}',
+          '${formData.status}'
           );`
     );
 
@@ -78,9 +80,9 @@ app.put("/tickets/:documentId", async (req, res) => {
       SET 
       title='${data.title}', 
       \`desc\`='${data.desc}', 
-
       category='${data.category}', 
-      preview='${data.preview}'  
+      preview='${data.preview}',  
+      status='${data.status}'
       WHERE id=${id}`
     );
     const response = `Post with id = /${id} has been edited`;

@@ -9,10 +9,10 @@ const TicketCard = ({ ticket }) => {
   return (
     <div className="ticket-card">
       <Link to={`/ticket/${ticket.id}`} id="link">
-        <StatusDisplay status={ticket.status} />
         <h3>{ticket.title}</h3>
         <PreviewDisplay ticket={ticket} />
-        <TitleDisplay title={ticket.title} />
+        {/* <TitleDisplay title={ticket.title} /> */}
+        <StatusDisplay status={ticket.status} />
         <DescDisplay desc={ticket.desc} />
       </Link>
       <DeleteBlock documentId={ticket.id} />
